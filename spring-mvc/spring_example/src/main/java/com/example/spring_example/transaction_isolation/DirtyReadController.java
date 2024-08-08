@@ -58,8 +58,8 @@ public class DirtyReadController {
                 Util.sleep(1000);
 
                 Statement stmt1 = conn1.createStatement();
-                stmt1.executeUpdate("UPDATE Account SET balance = 200 WHERE id = 1");
-                System.out.println("conn1: UPDATE Balance: 200");
+                stmt1.executeUpdate("UPDATE Account SET balance = balance + 100 WHERE id = 1");
+                System.out.println("conn1: UPDATE Balance: +100");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -101,14 +101,6 @@ public class DirtyReadController {
                     int balance = rs2.getInt("balance");
                     System.out.println("conn2: SELECT Balance: " + balance);
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }).thenRunAsync(() -> {
-            // 트랜잭션 2 COMMIT
-            try {
-                conn2.commit();
-                System.out.println("conn2: COMMIT");
             } catch (SQLException e) {
                 e.printStackTrace();
             }

@@ -73,9 +73,9 @@ public class LostUpdateController {
             }
 
             try {
-                // Util.sleep(2000);
+                Util.sleep(2000);
 
-                int updateBalance = balance + 50; // 잔액 증가
+                int updateBalance = balance + 100; // 잔액 증가
 
                 Statement stmt1 = conn1.createStatement();
                 stmt1.executeUpdate("UPDATE Account SET balance = " + updateBalance + " WHERE id = 1");
@@ -96,7 +96,7 @@ public class LostUpdateController {
         }).thenRunAsync(() -> {
             // 트랜잭션 1 SELECT
             try {
-                Util.sleep(2000);
+                Util.sleep(4000);
                 
                 Statement stmt1 = conn1.createStatement();
                 ResultSet rs1 = stmt1.executeQuery("SELECT balance FROM Account WHERE id = 1");
@@ -132,9 +132,9 @@ public class LostUpdateController {
             }
 
             try {
-                // Util.sleep(2000);
+                Util.sleep(2000);
 
-                int updateBalance = balance + 30; // 잔액 증가
+                int updateBalance = balance + 100; // 잔액 증가
 
                 Statement stmt2 = conn2.createStatement();
                 stmt2.executeUpdate("UPDATE Account SET balance = " + updateBalance + " WHERE id = 1");

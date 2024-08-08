@@ -75,7 +75,7 @@ public class NonrepeatableReadController {
             try {
                 Util.sleep(2000);
 
-                int updateBalance = balance + 50; // 잔액 증가
+                int updateBalance = balance + 100; // 잔액 증가
 
                 Statement stmt1 = conn1.createStatement();
                 stmt1.executeUpdate("UPDATE Account SET balance = " + updateBalance + " WHERE id = 1");

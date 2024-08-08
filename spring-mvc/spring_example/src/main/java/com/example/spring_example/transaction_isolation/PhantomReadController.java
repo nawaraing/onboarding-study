@@ -114,7 +114,7 @@ public class PhantomReadController {
                 Util.sleep(2000);
                 
                 Statement stmt2 = conn2.createStatement();
-                ResultSet rs2 = stmt2.executeQuery("SELECT id, balance FROM Account FOR UPDATE");
+                ResultSet rs2 = stmt2.executeQuery("SELECT id, balance FROM Account");
                 while (rs2.next()) {
                     int id = rs2.getInt("id");
                     int balance = rs2.getInt("balance");
