@@ -9,8 +9,8 @@ public class SyncAsyncBlockingNonblockingExample {
     public static void main(String[] args) {
 
         // SyncBlocking.run();
-        // AsyncBlocking.run();
-        SyncNonblocking.run();
+        AsyncBlocking.run();
+        // SyncNonblocking.run();
         // AsyncNonblocking.run(); // CompletableFuture
     }
 }
