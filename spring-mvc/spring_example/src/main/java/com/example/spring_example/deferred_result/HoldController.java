@@ -1,4 +1,4 @@
-package com.example.spring_example;
+package com.example.spring_example.deferred_result;
 
 import org.springframework.web.context.request.async.DeferredResult;
 
@@ -10,7 +10,6 @@ import java.util.concurrent.*;
 
 @RestController
 public class HoldController {
-
     private final String REQUEST_URL = "/hold";
 
     @GetMapping(REQUEST_URL)

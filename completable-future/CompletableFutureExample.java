@@ -9,10 +9,9 @@ public class CompletableFutureExample {
     public static void main(String[] args) {
 
         String flowResult = "START";
-        String URL = "";
         CompletableFuture<Void> future;
 
-        Util.logging(URL, "--- 0. Async Start ---");
+        Util.loggingWithThread("--- 0. Async Start ---");
             future = CompletableFuture.supplyAsync(() -> {
                 try {
                     Thread.sleep(1000);
@@ -20,7 +19,7 @@ public class CompletableFutureExample {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-                Util.logging(URL, "--- 1. supplyAsync() ---");
+                Util.loggingWithThread("--- 1. supplyAsync() ---");
                 return flowResult + " -> supplyAsync()";
             }).thenApplyAsync((res) -> {
                 try {
@@ -29,7 +28,7 @@ public class CompletableFutureExample {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-                Util.logging(URL, "--- 2. thenApplyAsync() ---");
+                Util.loggingWithThread("--- 2. thenApplyAsync() ---");
                 return res + " -> thenApplyAsync()";
             }).thenAcceptAsync((res) -> {
                 try {
@@ -38,21 +37,22 @@ public class CompletableFutureExample {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-                Util.logging(URL, "--- 3. thenAcceptAsync() ---");
+                Util.loggingWithThread("--- 3. thenAcceptAsync() ---");
             });
-        Util.logging(URL, "--- 4. Async End ---");
+        Util.loggingWithThread("--- 4. Async End ---");
         
         // String res = "default";
         try {
             // res = future.get();
             Thread.sleep(1000);
             future.get(); // blocking
-            Util.logging(URL, "--- 5. get() Done ---");
+            Util.loggingWithThread("--- 5. get() Done ---");
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 
-        // Util.logging(URL, res);
+
+        // Util.loggingWithThread(URL, res);
 
         // 메인 스레드가 종료되지 않도록 대기
         try {

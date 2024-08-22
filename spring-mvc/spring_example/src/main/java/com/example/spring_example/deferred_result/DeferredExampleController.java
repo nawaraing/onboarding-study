@@ -1,4 +1,4 @@
-package com.example.spring_example;
+package com.example.spring_example.deferred_result;
 
 import org.springframework.web.context.request.async.DeferredResult;
 
