@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>파일 업로드</title>
+
+    <script lang="javascript" src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>파일 업로드</h1>
+    </header>
+    <nav>
+        <!-- 내비게이션 메뉴 -->
+    </nav>
+    <main>
+        <section>
+            <h2>엑셀 업로드</h2>
+            <input type="file" id="upload" />
+            <div id="output"></div>
+        </section>
+    </main>
+    <footer>
+        <!-- 푸터 내용 -->
+    </footer>
+<!--     
+    <script>
+        const url = "https://docs.sheetjs.com/PortfolioSummary.xls";
+        async function downloadFile(url) {
+            var file = await (await fetch(url)).arrayBuffer();
+
+            const workbook = XLSX.read(file);
+
+            var worksheet = workbook.Sheets[workbook.SheetNames[0]];
+
+            // const table = XLSX.utils.sheet_to_html(worksheet);
+            // console.log(table);
+
+            const raw_data = XLSX.utils.sheet_to_json(worksheet, {header: 1});
+            console.log(raw_data);
+
+
+        }
+
+        // 파일 다운로드 호출
+        downloadFile(url);
+        
+        // var first_sheet = workbook.Sheets[workbook.SheetNames[0]];
+    </script>
+ -->
+    <script>
+        document.getElementById('upload').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+
+            if (!file) {
+                alert("file 선택이 잘못 되었습니다! : " + file);
+                return;
+            }
+
+            const reader = new FileReader();
+
+            // 파일이 ArrayBuffer로 변환될 때
+            reader.onload = function(e) {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
+
+                // 첫 번째 시트 가져오기
+                const firstSheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[firstSheetName];
+
+                // 시트 데이터를 JSON으로 변환
+                const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+                console.log(jsonData);
+
+            };
+
+            reader.onerror = function(error) {
+                alert('파일을 읽는 중 오류 발생: ', error);
+            };
+
+            // 파일을 ArrayBuffer로 읽음
+            reader.readAsArrayBuffer(file);
+
+        });
+
+    </script>
+</body>
+</html>
+
